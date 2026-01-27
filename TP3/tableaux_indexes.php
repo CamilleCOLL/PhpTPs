@@ -1,0 +1,6 @@
+<?php
+
+$prenom=["Ethan", "Camille", ]
+
+
+?>
