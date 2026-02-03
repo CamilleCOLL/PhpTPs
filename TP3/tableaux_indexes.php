@@ -1,6 +1,6 @@
 <?php
 
-$prenom=["Ethan", "Camille", ]
+$prenom=["Ethan", "Camille", "Gianni"]
 
 
 ?>
