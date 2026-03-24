@@ -1,5 +1,5 @@
 <?php
-
+require_once "modeles/Monstre.php";
 class Gobelin extends Monstre
 {
 
@@ -13,6 +13,6 @@ class Gobelin extends Monstre
 
     public function calculerDegats()
     {
-
+        return ($this->pv * 1.5) + ($this->xpDonnee * 2);
     }
 }

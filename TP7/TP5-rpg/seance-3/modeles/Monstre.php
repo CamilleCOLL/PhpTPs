@@ -2,9 +2,9 @@
 
 abstract class Monstre
 {
-    private string $nom;
-    private int $pv;
-    private int $xpDonnee;
+    protected string $nom;
+    protected int $pv;
+    protected int $xpDonnee;
 
     public function __construct(string $nom, int $pv, int $xpDonnee)
     {
@@ -14,6 +14,8 @@ abstract class Monstre
     }
 
     abstract public function calculerDegats();
+
+
 
 
 }

@@ -13,6 +13,6 @@ class Dragon extends Monstre
 
     public function calculerDegats()
     {
-
+        return ($this->pv * 3) + ($this->xpDonnee * 4);
     }
 }
