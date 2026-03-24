@@ -15,10 +15,11 @@ class Guerrier extends Personnage
     }
 
     public function getForce() : int {return $this->force;}
-    public function sePresenter()
-    {
-        return parent::sePresenter() . " - Force : " . $this->force;
-    }
+
+//    public function sePresenter()
+//    {
+//        return parent::sePresenter() . " - Force : " . $this->force;
+//    }
 
     public function calculerDegats()
     {
@@ -28,6 +29,16 @@ class Guerrier extends Personnage
     public function attaquer()
     {
         return $this->nom . " frappe avec son épée ! Dégats : " . $this->calculerDegats();
+    }
+
+    public function getSpecialite() : string
+    {
+        return "Guerrier";
+    }
+
+    public function getDetails()
+    {
+        return "Force = " . $this->force;
     }
 
 }

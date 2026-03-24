@@ -1,6 +1,6 @@
 <?php
 
-class Personnage
+abstract class Personnage
 {
     protected string $nom;
     private string $classe;
@@ -45,7 +45,7 @@ class Personnage
 
     // Méthodes métier
     public function sePresenter() {
-        return "[" . $this->classe . "] " . $this->nom
+        return "[" . $this->getSpecialite() . "] " . $this->nom
             . " — Niveau " . $this->niveau
             . " — PV : " . $this->pointsDeVie . "/" . $this->pointsDeVieMax;
     }
@@ -72,12 +72,18 @@ class Personnage
         return "🎉 " . $this->nom . " passe au niveau " . $this->niveau . " !";
     }
 
-    public function calculerDegats()
-    {
-        return 5;
-    }
-    public function attaquer()
-    {
-        return $this->nom . " attaque ! Dégats : " . $this->calculerDegats();
-    }
+//    public function calculerDegats()
+//    {
+//        return 5;
+//    }
+//    public function attaquer()
+//    {
+//        return $this->nom . " attaque ! Dégats : " . $this->calculerDegats();
+//    }
+
+    abstract function calculerDegats();
+    abstract function attaquer();
+
+    abstract function getSpecialite();
+
 }

@@ -33,10 +33,11 @@ class Archer extends Personnage
 
     }
 
-    public function sePresenter()
-    {
-        return parent::sePresenter() . " - Précision : " . $this->precision . " - Nombre de flèches : " . $this->fleches;
-    }
+//
+//    public function sePresenter()
+//    {
+//        return parent::sePresenter() . " - Précision : " . $this->precision . " - Nombre de flèches : " . $this->fleches;
+//    }
     public function calculerDegats()
     {
         return ($this->precision*3) + ($this->niveau*2);
@@ -47,4 +48,13 @@ class Archer extends Personnage
         return $this->nom . " tire une flèche ! Dégats : " . $this->calculerDegats();
     }
 
+    public function getSpecialite() : string
+    {
+        return "Archer";
+    }
+
+    public function getDetails()
+    {
+        return "Précision = " . $this->precision . " - Nombre de flèches : " . $this->fleches;
+    }
 }

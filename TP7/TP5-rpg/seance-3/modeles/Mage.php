@@ -26,10 +26,11 @@ class Mage extends Personnage
         return $this->manaMax;
     }
 
-    public function sePresenter()
-    {
-        return parent::sePresenter() . " - Mana : " . $this->mana . "/" . $this->manaMax;
-    }
+//
+//    public function sePresenter()
+//    {
+//        return parent::sePresenter() . " - Mana : " . $this->mana . "/" . $this->manaMax;
+//    }
 
     public function calculerDegats()
     {
@@ -41,4 +42,13 @@ class Mage extends Personnage
         return $this->nom . " lance un sort ! Dégats : " . $this->calculerDegats();
     }
 
+    public function getSpecialite() : string
+    {
+        return "Mage";
+    }
+
+    public function getDetails()
+    {
+        return "Mana = " . $this->mana;
+    }
 }
