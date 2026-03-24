@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP - La Cheat Sheet Complète</title>
+    <style>
+        :root {
+            --primary-color: #4F5D95; /* Bleu PHP */
+            --accent-color: #7A86B8;
+            --bg-color: #f8f9fa;
+            --code-bg: #282c34;
+            --text-color: #333;
+            --sidebar-width: 280px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--bg-color);
+            display: flex;
+        }
+
+        /* Navigation Latérale */
+        nav {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li { margin-bottom: 10px; }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #f0f7fc;
+            color: var(--primary-color);
+            padding-left: 15px;
+        }
+
+        /* Contenu Principal */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 15px; font-size: 0.95rem; }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--code-bg);
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        /* Syntax Highlighting Simulé */
+        .kwd { color: #c678dd; font-weight: bold; } /* Keywords */
+        .str { color: #98c379; } /* Strings */
+        .num { color: #d19a66; } /* Numbers */
+        .com { color: #5c6370; font-style: italic; } /* Comments */
+        .var { color: #e06c75; } /* Variables */
+        .func { color: #61afef; } /* Functions */
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            nav { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid #ddd; }
+            main { margin-left: 0; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>PHP Cheat Sheet</h1>
+    <ul>
+        <li><a href="#bases">1. Syntaxe & Variables</a></li>
+        <li><a href="#operateurs">2. Opérateurs</a></li>
+        <li><a href="#conditions">3. Conditions</a></li>
+        <li><a href="#boucles">4. Boucles</a></li>
+        <li><a href="#tableaux">5. Tableaux (Arrays)</a></li>
+        <li><a href="#array-funcs">6. Fonctions Tableaux</a></li>
+        <li><a href="#fonctions">7. Fonctions</a></li>
+        <li><a href="#scope">8. Portée & Modularité</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <section id="bases">
+        <h2>1. Syntaxe de Base & Variables (TP 1)</h2>
+
+        <h3>Balises et Affichage</h3>
+        <p>Le code PHP s'exécute côté serveur. L'extension du fichier doit être <code>.php</code>.</p>
+        <pre><code><span class="kwd">&lt;?php</span>
+    <span class="kwd">echo</span> <span class="str">"Bonjour"</span>; <span class="com">// Affiche du texte</span>
+    <span class="kwd">print</span> <span class="str">"Texte"</span>;  <span class="com">// Similaire à echo</span>
+<span class="kwd">?&gt;</span>
+
+<span class="com">&lt;!-- Intégration HTML --&gt;</span>
+&lt;h1&gt;<span class="kwd">&lt;?php</span> <span class="kwd">echo</span> <span class="var">$titre</span>; <span class="kwd">?&gt;</span>&lt;/h1&gt;</code></pre>
+
+        <h3>Variables et Types</h3>
+        <p>Les variables commencent toujours par <code>$</code>. Le typage est dynamique.</p>
+        <pre><code><span class="var">$nom</span> = <span class="str">"Jean"</span>;      <span class="com">// String</span>
+<span class="var">$age</span> = <span class="num">25</span>;          <span class="com">// Integer</span>
+<span class="var">$prix</span> = <span class="num">19.99</span>;      <span class="com">// Float</span>
+<span class="var">$actif</span> = <span class="kwd">true</span>;      <span class="com">// Boolean</span>
+
+<span class="kwd">echo</span> <span class="func">gettype</span>(<span class="var">$age</span>); <span class="com">// Vérifier le type</span></code></pre>
+
+        <h3>Guillemets</h3>
+        <p>Double quotes (<code>"</code>) interprètent les variables. Simple quotes (<code>'</code>) affichent le texte brut.</p>
+        <pre><code><span class="kwd">echo</span> <span class="str">"J'habite à $ville"</span>;  <span class="com">// Affiche la valeur de $ville</span>
+<span class="kwd">echo</span> <span class="str">'J\'habite à $ville'</span>; <span class="com">// Affiche littéralement $ville</span></code></pre>
+    </section>
+
+    <section id="operateurs">
+        <h2>2. Opérateurs (TP 1)</h2>
+
+        <h3>Arithmétique & Concaténation</h3>
+        <pre><code><span class="com">// Arithmétique</span>
+<span class="var">$sum</span> = <span class="num">10</span> + <span class="num">2</span>;
+<span class="var">$mod</span> = <span class="num">10</span> % <span class="num">3</span>; <span class="com">// Modulo (reste de la division)</span>
+<span class="var">$pow</span> = <span class="num">2</span> ** <span class="num">3</span>; <span class="com">// Puissance (2 exposant 3)</span>
+
+<span class="com">// Concaténation (le point)</span>
+<span class="var">$complet</span> = <span class="var">$prenom</span> . <span class="str">" "</span> . <span class="var">$nom</span>;</code></pre>
+
+        <h3>Comparaison & Logique</h3>
+        <pre><code><span class="com">// Comparaison</span>
+<span class="var">$a</span> == <span class="var">$b</span>   <span class="com">// Égalité de valeur</span>
+<span class="var">$a</span> === <span class="var">$b</span>  <span class="com">// Égalité stricte (valeur ET type)</span>
+<span class="var">$a</span> != <span class="var">$b</span>   <span class="com">// Différent</span>
+
+<span class="com">// Logique</span>
+<span class="var">$a</span> && <span class="var">$b</span>   <span class="com">// ET</span>
+<span class="var">$a</span> || <span class="var">$b</span>   <span class="com">// OU</span>
+!<span class="var">$a</span>        <span class="com">// NON</span></code></pre>
+    </section>
+
+    <section id="conditions">
+        <h2>3. Structures Conditionnelles (TP 2)</h2>
+
+        <h3>If / Elseif / Else</h3>
+        <pre><code><span class="kwd">if</span> (<span class="var">$note</span> >= <span class="num">16</span>) {
+    <span class="kwd">echo</span> <span class="str">"Excellent"</span>;
+} <span class="kwd">elseif</span> (<span class="var">$note</span> >= <span class="num">10</span>) {
+    <span class="kwd">echo</span> <span class="str">"Passable"</span>;
+} <span class="kwd">else</span> {
+    <span class="kwd">echo</span> <span class="str">"Échec"</span>;
+}</code></pre>
+
+        <h3>Switch</h3>
+        <p>Utile pour comparer une variable à plusieurs valeurs précises.</p>
+        <pre><code><span class="kwd">switch</span> (<span class="var">$jour</span>) {
+    <span class="kwd">case</span> <span class="str">"lundi"</span>:
+        <span class="kwd">echo</span> <span class="str">"Début de semaine"</span>;
+        <span class="kwd">break</span>; <span class="com">// Indispensable pour arrêter l'exécution</span>
+    <span class="kwd">default</span>:
+        <span class="kwd">echo</span> <span class="str">"Autre jour"</span>;
+}</code></pre>
+    </section>
+
+    <section id="boucles">
+        <h2>4. Boucles (TP 2)</h2>
+
+        <h3>For</h3>
+        <p>À utiliser quand on connaît le nombre d'itérations.</p>
+        <pre><code><span class="kwd">for</span> (<span class="var">$i</span> = <span class="num">1</span>; <span class="var">$i</span> <= <span class="num">5</span>; <span class="var">$i</span>++) {
+    <span class="kwd">echo</span> <span class="str">"Numéro : $i"</span>;
+}</code></pre>
+
+        <h3>While</h3>
+        <p>Tant qu'une condition est vraie.</p>
+        <pre><code><span class="kwd">while</span> (<span class="var">$tentative</span> != <span class="var">$secret</span>) {
+    <span class="var">$tentative</span>++;
+}</code></pre>
+
+        <h3>Do...While</h3>
+        <p>S'exécute <strong>au moins une fois</strong>.</p>
+        <pre><code><span class="kwd">do</span> {
+    <span class="kwd">echo</span> <span class="str">"Menu..."</span>;
+} <span class="kwd">while</span> (<span class="var">$choix</span> != <span class="num">3</span>);</code></pre>
+    </section>
+
+    <section id="tableaux">
+        <h2>5. Tableaux (Arrays) (TP 3)</h2>
+
+        <h3>Tableaux Indexés</h3>
+        <p>Clés numériques automatiques (commence à 0).</p>
+        <pre><code><span class="var">$fruits</span> = [<span class="str">"pomme"</span>, <span class="str">"banane"</span>]; <span class="com">// Création</span>
+<span class="var">$fruits</span>[] = <span class="str">"orange"</span>;          <span class="com">// Ajout à la fin</span>
+<span class="kwd">echo</span> <span class="var">$fruits</span>[<span class="num">0</span>];               <span class="com">// Accès (affiche pomme)</span></code></pre>
+
+        <h3>Tableaux Associatifs</h3>
+        <p>Clés nommées (chaînes de caractères), similaire aux objets littéraux JS.</p>
+        <pre><code><span class="var">$user</span> = [
+    <span class="str">"nom"</span> => <span class="str">"Dupont"</span>,
+    <span class="str">"age"</span> => <span class="num">25</span>
+];
+
+<span class="kwd">echo</span> <span class="var">$user</span>[<span class="str">"nom"</span>]; <span class="com">// Affiche Dupont</span></code></pre>
+
+        <h3>Parcours (Foreach)</h3>
+        <p>La boucle incontournable pour les tableaux.</p>
+        <pre><code><span class="com">// Parcours simple (valeur)</span>
+<span class="kwd">foreach</span> (<span class="var">$fruits</span> <span class="kwd">as</span> <span class="var">$fruit</span>) {
+    <span class="kwd">echo</span> <span class="var">$fruit</span>;
+}
+
+<span class="com">// Parcours complet (clé et valeur) - Vital pour associatifs</span>
+<span class="kwd">foreach</span> (<span class="var">$user</span> <span class="kwd">as</span> <span class="var">$cle</span> => <span class="var">$valeur</span>) {
+    <span class="kwd">echo</span> <span class="str">"$cle : $valeur"</span>;
+}</code></pre>
+
+        <h3>Tableaux Multidimensionnels</h3>
+        <pre><code><span class="var">$classe</span> = [
+    [<span class="str">"nom"</span> => <span class="str">"Jean"</span>, <span class="str">"note"</span> => <span class="num">15</span>],
+    [<span class="str">"nom"</span> => <span class="str">"Marie"</span>, <span class="str">"note"</span> => <span class="num">18</span>]
+];
+<span class="kwd">echo</span> <span class="var">$classe</span>[<span class="num">0</span>][<span class="str">"nom"</span>]; <span class="com">// Accès imbriqué</span></code></pre>
+    </section>
+
+    <section id="array-funcs">
+        <h2>6. Fonctions de Tableaux (TP 3)</h2>
+        <p>Les fonctions natives indispensables.</p>
+
+        <h3>Information & Recherche</h3>
+        <ul>
+            <li><code>count($tab)</code> : Compte le nombre d'éléments.</li>
+            <li><code>in_array($val, $tab)</code> : Vérifie si la valeur existe (true/false).</li>
+            <li><code>array_search($val, $tab)</code> : Trouve la clé d'une valeur.</li>
+            <li><code>isset($tab['key'])</code> : Vérifie si une clé existe.</li>
+        </ul>
+
+        <h3>Modification</h3>
+        <ul>
+            <li><code>array_push($tab, $val)</code> : Ajoute à la fin.</li>
+            <li><code>array_pop($tab)</code> : Retire le dernier élément.</li>
+            <li><code>array_unshift($tab, $val)</code> : Ajoute au début.</li>
+            <li><code>array_shift($tab)</code> : Retire le premier élément.</li>
+            <li><code>array_merge($t1, $t2)</code> : Fusionne deux tableaux.</li>
+        </ul>
+
+        <h3>Tri</h3>
+        <ul>
+            <li><code>sort()</code> : Tri croissant (valeur).</li>
+            <li><code>rsort()</code> : Tri décroissant (valeur).</li>
+            <li><code>asort()</code> : Tri croissant en gardant les associations clés/valeurs.</li>
+        </ul>
+    </section>
+
+    <section id="fonctions">
+        <h2>7. Fonctions (TP 4)</h2>
+
+        <h3>Déclaration et Appel</h3>
+        <pre><code><span class="kwd">function</span> <span class="func">saluer</span>(<span class="var">$nom</span>, <span class="var">$titre</span> = <span class="str">"M."</span>) { <span class="com">// Paramètre avec valeur par défaut</span>
+    <span class="kwd">return</span> <span class="str">"Bonjour $titre $nom"</span>;     <span class="com">// Retourne un résultat</span>
+}
+
+<span class="kwd">echo</span> <span class="func">saluer</span>(<span class="str">"Dupont"</span>); <span class="com">// Appel</span></code></pre>
+
+        <h3>Passage par référence</h3>
+        <p>Permet à une fonction de modifier directement la variable originale.</p>
+        <pre><code><span class="kwd">function</span> <span class="func">ajouterUn</span>(&<span class="var">$nb</span>) { <span class="com">// Notez le &</span>
+    <span class="var">$nb</span>++;
+}
+<span class="var">$x</span> = <span class="num">5</span>;
+<span class="func">ajouterUn</span>(<span class="var">$x</span>); <span class="com">// $x vaut maintenant 6</span></code></pre>
+
+        <h3>Scope (Portée)</h3>
+        <p>Une variable définie hors d'une fonction n'est pas accessible dedans, sauf déclaration spécifique.</p>
+        <pre><code><span class="var">$globalVar</span> = <span class="num">10</span>;
+
+<span class="kwd">function</span> <span class="func">test</span>() {
+    <span class="kwd">global</span> <span class="var">$globalVar</span>; <span class="com">// Importation de la variable globale</span>
+    <span class="kwd">echo</span> <span class="var">$globalVar</span>;
+}</code></pre>
+    </section>
+
+    <section id="scope">
+        <h2>8. Modularité (TP 4)</h2>
+
+        <h3>Superglobales</h3>
+        <p>Variables automatiques accessibles partout.</p>
+        <ul>
+            <li><code>$_GET</code> : Données d'URL (paramètres).</li>
+            <li><code>$_POST</code> : Données de formulaire envoyé.</li>
+            <li><code>$_SERVER</code> : Informations serveur.</li>
+        </ul>
+
+        <h3>Inclusion de fichiers</h3>
+        <p>Permet de découper le code en plusieurs fichiers.</p>
+        <pre><code><span class="kwd">include</span> <span class="str">'header.php'</span>;      <span class="com">// Continue même si le fichier manque</span>
+<span class="kwd">require</span> <span class="str">'config.php'</span>;      <span class="com">// Stoppe tout si le fichier manque</span>
+<span class="kwd">require_once</span> <span class="str">'lib.php'</span>;    <span class="com">// Idem, mais ne charge qu'une seule fois</span></code></pre>
+    </section>
+
+</main>
+
+</body>
+</html>

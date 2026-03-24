@@ -1,0 +1,93 @@
+OBJET ET CONSTRUCTEUR --------------------------------------------------------------------------------------------------
+
+On utilise un constructeur pour pour initaliser les proriétés de l'objet.
+    - D'abord on déclare l'objet
+    - On crée le constructeur
+
+Exemple :
+
+class Personnage {
+    public $nom;
+    public $classe;
+    public $niveau;
+    public $pointsDeVie;
+    public $pointsDeVieMax;
+
+    public function __construct($nom, $classe, $niveau, $pvMax) {
+        $this->nom            = $nom;
+        $this->classe         = $classe;
+        $this->niveau         = $niveau;
+        $this->pointsDeVieMax = $pvMax;
+        $this->pointsDeVie    = $pvMax; // Démarre au maximum
+    }
+}
+
+
+On peut placer des paramètres optionnels dans le constructeur. On donne alors des valeurs
+par défaut s'ils ne sont pas renseignés. Ces paramètres sont forcément placés après les
+paramètres obligatoires.
+
+On valide les données dans le constructeur comme ça, si elles ne sont pas valides,
+l'objet n'est pas créer.
+
+    public function __construct($nom, $classe, $niveau = 1, $pvMax = 100) {
+        if (empty($nom)) {
+            throw new Exception("Le nom du personnage ne peut pas être vide.");
+        }
+        if ($niveau < 1) {
+            throw new Exception("Le niveau doit être au moins 1. Reçu : " . $niveau);
+        }
+        if ($pvMax <= 0) {
+            throw new Exception("Les PV max doivent être positifs.");
+        }
+
+        $this->nom            = $nom;
+        $this->classe         = $classe;
+        $this->niveau         = $niveau;
+        $this->pointsDeVieMax = $pvMax;
+        $this->pointsDeVie    = $pvMax;
+    }
+
+On attrape l'erreur avec try/catch : si le constructeur attrape une erreur, l'objet
+n'est pas créer et la variable reste null
+
+    try {
+        $p = new Personnage("", "Mage", 5, 80); // Nom vide → exception
+        echo $p->sePresenter();                 // Cette ligne ne s'exécute pas
+    } catch (Exception $e) {
+        echo "Impossible de créer le personnage : " . $e->getMessage();
+        // Affiche : "Impossible de créer le personnage : Le nom du personnage ne peut pas être vide."
+    }
+
+
+VISIBILITÉ -------------------------------------------------------------------------------------------------------------
+
+On déclare les propriété en private pour interdir tout accès depuis l'extérieur de la classe
+
+    class Personnage {
+        private $nom;
+        private $niveau;
+        private $pointsDeVie;
+        private $pointsDeVieMax;
+    }
+$p = new Personnage("Gandalf", "Mage", 12, 80);
+echo $p->nom;          // ❌ Fatal error : Cannot access private property
+$p->niveau = 0;        // ❌ Fatal error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
